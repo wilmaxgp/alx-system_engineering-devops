@@ -1,3 +1,2 @@
-My First shell project
-
+My First commit
 
