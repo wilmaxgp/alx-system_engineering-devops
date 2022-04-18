@@ -1,2 +1,7 @@
-My First commit
+My First shell project
+
+Where am i?
+
+
+
 
