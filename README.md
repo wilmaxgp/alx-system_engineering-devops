@@ -1,7 +1,1 @@
-My First shell project
-
-Where am i?
-
-
-
-
+0x00. Shell,basics Projects
