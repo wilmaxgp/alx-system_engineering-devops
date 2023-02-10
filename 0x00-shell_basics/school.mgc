@@ -1,2 +1,2 @@
 !#/bin/bash
-SCHOOL -a ls
+ls -a SCHOOL
