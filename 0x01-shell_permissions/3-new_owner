@@ -1,2 +1,2 @@
 #!/bin/bash
-chown -hR root /hello
+chown -hR betty /hello
