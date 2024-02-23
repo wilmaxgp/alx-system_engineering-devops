@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays a list of currently running processes.
+
+# Display headers
+printf "%-10s %-10s %-5s %-5s %-10s %-10s %-10s %-10s %-10s %s\n" \
+    "USER" "PID" "%CPU" "%MEM" "VSZ" "RSS" "TTY" "STAT" "START" "TIME" "COMMAND"
+
+# Display processes using ps command in a user-oriented format with process hierarchy
+ps axo user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd --forest | sed 1d
