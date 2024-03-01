@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
-regex = /hbt*n/
+
+regex = /hbt+n/
 string = ARGV[0]
-puts string.match(regex) ? string.match(regex)[0] : ''
+match = string.match(regex)
+
+puts match ? match[0] : ''
