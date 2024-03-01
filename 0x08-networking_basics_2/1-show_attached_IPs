@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script displays all active IPv4 IPs on the machine
+
+# Get all active IPv4 IPs
+ipv4_ips=$(ip -4 addr | grep inet | awk '{print $2}' | cut -d'/' -f1)
+
+# Display the IPs
+echo "$ipv4_ips"
