@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This script listens on port 98 on localhost
+
+# Check if running with root privileges
+if [[ $EUID -ne 0 ]]; then
+    echo "Please run this script as root"
+    exit 1
+fi
+
+# Listen on port 98 using netcat
+nc -l 127.0.0.1 98
