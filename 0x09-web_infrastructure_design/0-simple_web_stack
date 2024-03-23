@@ -1,0 +1,22 @@
+Here is how a one-server web infrastructure step by step guide on how it will work:
+
+# Step 1 -User Wants to Access the Website:
+Imagine a user sitting at their computer and typing "www.foobar.com" into their web browser because they want to visit our website.
+
+# Step 2 -Domain Name Configuration:
+We have our domain name "foobar.com" configured with a www record that points to our server's IP address, which is 8.8.8.8. This means when the user types "www.foobar.com," their computer knows to send a request to our server at the specified IP address.
+
+# Step 3 -Server:
+We have one server, which is like a powerful computer, responsible for hosting our entire web infrastructure.
+
+# Step 4 -Web Server (Nginx):
+On our server, we have installed a web server called Nginx. Think of Nginx as a traffic cop directing incoming requests from users to the right places in our infrastructure.
+
+# Step 5 -Application Server:
+We also have an application server installed on our server. This server runs the code that makes our website work. When a user requests a web page, the application server processes the request and generates the page to send back to the user.
+
+# Step 6 -Application Files (Your Code Base):
+Our application server runs the code that makes up our website. These files contain all the instructions and content needed to create the web pages users see.
+
+# Step 7 -Database (MySQL):
+To store and manage data for our website, we have a database installed. We're using MySQL for this. The database stores things like user information, content, and settings.
