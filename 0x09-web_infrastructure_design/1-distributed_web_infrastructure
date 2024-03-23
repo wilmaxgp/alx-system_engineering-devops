@@ -1,0 +1,52 @@
+# The design of the three-server web infrastructure on a whiteboard:
+
+- 1. **User Wants to Access the Website:**
+Imagine a user sitting at their computer and typing "www.foobar.com" into their web browser because they want to visit our website.
+
+- 2. **Domain Name Configuration:**
+We have our domain name "foobar.com" configured with a www record that points to the IP addresses of our load balancer. This ensures that when users type "www.foobar.com" into their browser, their requests are directed to the load balancer.
+
+- 3. **Load Balancer (HAproxy):**
+We have a load balancer called HAproxy. It acts as a traffic cop, distributing incoming requests from users across multiple servers to ensure they're evenly balanced. This helps prevent any one server from getting overwhelmed with too much traffic.
+
+- 4. **Web Server (Nginx):**
+We have one server dedicated to serving as the web server, running Nginx. Nginx receives requests from the load balancer and forwards them to the appropriate application server based on the load balancing algorithm configured in the load balancer.
+
+- 5. **Application Server:**
+We have another server dedicated to running the application server. The application server hosts our code base and processes user requests to generate dynamic content for the website.
+
+- 6. **Database (MySQL):**
+We have a separate server hosting our MySQL database. The database stores all the data needed for our website, such as user accounts, posts, or product details.
+
+
+# Some specifics about this 3 server infrastructure:
+- 1. **Why Each Additional Element is Added:**
+    - Load Balancer (HAproxy): Added to distribute incoming traffic across multiple servers, ensuring optimal resource utilization and fault tolerance.
+    - Application Server (Server 2): Added to handle dynamic content processing and execution of website codebase, separate from serving static content.
+    - Database Server (MySQL): Added to store and manage website data, providing a centralized location for data storage and retrieval.
+- 2. **Distribution Algorithm of Load Balancer:**
+    - The load balancer (HAproxy) is configured with a round-robin distribution algorithm. This algorithm distributes incoming requests equally among the available servers in a cyclic manner, ensuring that each server receives an approximately equal share of the traffic load.
+- 3. **Active-Active vs. Active-Passive Setup:**
+    - The load balancer is enabling an Active-Active setup. In an Active-Active setup, both servers are actively serving requests simultaneously. The load balancer distributes traffic evenly across both servers, allowing them to share the workload and handle requests concurrently.
+    - In contrast, an Active-Passive setup involves one server actively serving requests while the other server remains in standby mode, ready to take over if the active server fails. This setup is less common in this infrastructure configuration.
+- 4. **Primary-Replica (Master-Slave) Database Cluster:**
+    - In a Primary-Replica (Master-Slave) database cluster, the primary node (master) handles all write operations and updates to the database. Any changes made to the data are replicated to one or more replica nodes (slaves) in near real-time.
+    - Read operations can be distributed among the replica nodes, offloading some of the read traffic from the primary node and improving overall database performance.
+    - If the primary node fails, one of the replica nodes can be promoted to the primary role to ensure continuous database availability.
+- 5. **Difference Between Primary Node and Replica Node:**
+    - The primary node (master) is responsible for handling write operations and updates to the database. It serves as the authoritative source for data changes and maintains the integrity of the database.
+    -  Replica nodes (slaves) receive replicated copies of data from the primary node and are primarily used for read operations. They help distribute read traffic, improve database performance, and provide redundancy in case the primary node fails.
+
+# Some issues are with this 3 server infrastructure:
+1. **Single Point of Failure (SPOF):**
+   - The potential SPOF in this infrastructure could be the load balancer. If the load balancer fails, it becomes a bottleneck, and the entire system may become inaccessible.
+   - Additionally, if there's only one database server (MySQL), it could also be a single point of failure. If the database server goes down, the entire application might become unusable.
+
+2. **Security Issues:**
+   - Lack of firewall: Without a firewall, the servers are more vulnerable to unauthorized access, malicious attacks, and potential breaches. A firewall helps filter and control incoming and outgoing network traffic, enhancing security.
+   - No HTTPS: Without HTTPS (SSL/TLS encryption), data transmitted between the users' web browsers and the servers is vulnerable to interception, eavesdropping, and tampering. Implementing HTTPS ensures data confidentiality and integrity, protecting sensitive information such as login credentials and personal data.
+
+3. **No Monitoring:**
+   - Without monitoring tools and systems in place, it's challenging to detect and address issues such as server failures, performance bottlenecks, or abnormal behavior.
+   - Monitoring provides visibility into the health and performance of the infrastructure, allowing proactive detection of issues and timely remediation.
+   - Lack of monitoring can lead to downtime, degraded performance, and potential security breaches going unnoticed.
