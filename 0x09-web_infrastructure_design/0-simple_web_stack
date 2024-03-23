@@ -1,22 +1,58 @@
-Here is how a one-server web infrastructure step by step guide on how it will work:
+# Here is how a one-server web infrastructure step by step guide on how it will work:
 
-# Step 1 -User Wants to Access the Website:
+- Step 1 -User Wants to Access the Website:
 Imagine a user sitting at their computer and typing "www.foobar.com" into their web browser because they want to visit our website.
 
-# Step 2 -Domain Name Configuration:
+- Step 2 -Domain Name Configuration:
 We have our domain name "foobar.com" configured with a www record that points to our server's IP address, which is 8.8.8.8. This means when the user types "www.foobar.com," their computer knows to send a request to our server at the specified IP address.
 
-# Step 3 -Server:
+- Step 3 -Server:
 We have one server, which is like a powerful computer, responsible for hosting our entire web infrastructure.
 
-# Step 4 -Web Server (Nginx):
+- Step 4 -Web Server (Nginx):
 On our server, we have installed a web server called Nginx. Think of Nginx as a traffic cop directing incoming requests from users to the right places in our infrastructure.
 
-# Step 5 -Application Server:
+- Step 5 -Application Server:
 We also have an application server installed on our server. This server runs the code that makes our website work. When a user requests a web page, the application server processes the request and generates the page to send back to the user.
 
-# Step 6 -Application Files (Your Code Base):
+- Step 6 -Application Files (Your Code Base):
 Our application server runs the code that makes up our website. These files contain all the instructions and content needed to create the web pages users see.
 
-# Step 7 -Database (MySQL):
+- Step 7 -Database (MySQL):
 To store and manage data for our website, we have a database installed. We're using MySQL for this. The database stores things like user information, content, and settings.
+
+# Concepts in simple terms:
+- 1. **What is a server?**
+A server is like a big computer that stores and manages information or provides services to other computers over a network, like the internet. In our case, it's the computer that hosts our website.
+
+- 2. **What is the role of the domain name?**
+A domain name is like the address of a website. It helps users find and access the website they want. It's easier to remember "www.foobar.com" than an IP address like "8.8.8.8."
+
+- 3. **What type of DNS record is www in www.foobar.com?**
+The "www" in "www.foobar.com" is a subdomain, and it typically has a DNS record of type CNAME (Canonical Name) that points to the main domain name "foobar.com."
+
+- 4. **What is the role of the web server?**
+The web server (like Nginx) is like a traffic cop for the website. It receives requests from users' web browsers, finds the right information on the server, and sends it back to the users.
+
+- 5. **What is the role of the application server?**
+The application server is like the brain of the website. It runs the code that makes the website work. When a user asks for a webpage, the application server fetches the necessary information, processes it, and creates the webpage to send back to the user.
+
+- 6. **What is the role of the database?**
+The database is like a digital filing cabinet for the website. It stores all the information needed to make the website work, like user accounts, posts, or product details. When the application server needs information, it asks the database for it.
+
+- 7. **What is the server using to communicate with the computer of the user requesting the website?**
+The server communicates with the user's computer over the internet using a protocol called HTTP (Hypertext Transfer Protocol). When the user's web browser requests a webpage, it sends an HTTP request to the server. The server processes the request and sends back an HTTP response containing the requested webpage.
+
+
+# Let us explain what the issues are with this one server infrastructure:
+- **Single Point of Failure (SPOF):**
+Imagine if our one server suddenly stops working or crashes. Since everything—the website, application code, and database—is on that single server, the entire website would go down. It's like having all your eggs in one basket. If something happens to that basket, you lose all your eggs at once.
+
+- **Downtime During Maintenance:**
+When we need to make updates or changes to the website, like deploying new code or fixing issues, we might need to restart the web server. During this time, the website could be temporarily unavailable to users. It's like closing a store for renovations. While the renovations are happening, customers can't come in and shop.
+
+- **Limited Scalability:**
+If our website becomes really popular and starts getting lots of visitors, our single server might not be able to handle all the traffic efficiently. It's like trying to fit too many people into a small room. Eventually, there's not enough space for everyone, and things start to get crowded. Our website might slow down or crash if there's too much traffic.
+
+# Conclusion
+The issues with this one-server infrastructure are like having all your resources in one place, making it vulnerable to failure, causing downtime during maintenance, and limiting its ability to handle a large number of users.
