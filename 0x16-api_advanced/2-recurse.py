@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+
 import requests
 
-def recurse(subreddit, hot_list=[]):
+def recurse(subreddit, hot_list=None):
+    if hot_list is None:
+        hot_list=[]
 
     """
     Recursively fetches all hot articles from a given subreddit.
